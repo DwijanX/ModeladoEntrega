@@ -6,7 +6,7 @@ import matplotlib.pyplot as pl
 import cv2
 from skimage.feature import hog
 
-data=h5py.File("Python\Modelado\Files\gatillos_train.h5",'r')
+data=h5py.File("Gatos\Files\gatillos_train.h5",'r')
 #data=h5py.File("../Files/gatillos_train.h5",'r')
 X=data["train_set_x"][:]
 y=data["train_set_y"][:]
@@ -32,7 +32,7 @@ r.capa1=64*64
 r.capa2=128
 r.capa3=2
 #r.inicializar()
-r.cargar_parametros("Python\Modelado\Files\HOG\ParamsGatos_"+str(epoca)+".h5")
+r.cargar_parametros("Gatos\ParametrosGenerados\HOG\ParamsGatos_"+str(epoca)+".h5")
 #r.cargar_parametros("Python\Modelado\Files\HOG\ParamsGatos_Best.h5")
 
 r.fit(XProcessed,y)
@@ -40,9 +40,9 @@ r.setProcessImg(processImgHOG)
 for i in range(1,15):
     print("\nEpoca=",i+1)
     r.entrenar()
-    Suc,Err=r.ProbarLambda2("Python\Modelado\Files\gatillos_test.h5","test_set_x","test_set_y")
+    Suc,Err=r.ProbarLambda2("Gatos\Files\gatillos_test.h5","test_set_x","test_set_y")
     print("suc",Suc)
     print("Err",Err)
-    r.GuardarParams("Python\Modelado\Files\HOG\ParamsGatos_"+str(i+1)+".h5")
+    r.GuardarParams("Gatos\ParametrosGenerados\HOG\ParamsGatos_"+str(i+1)+".h5")
 
 #image PIL SKIMAGE

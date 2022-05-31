@@ -9,7 +9,7 @@ import cv2
 from Red_Neuronal import *
 
 r=RedNeuronal()
-r.cargar_parametros('../Files/theta_digitos.h5')
+r.cargar_parametros('Reconocimiento de Digitos\Files\\theta_digitos.h5')
 #test=cv2.imread('../Files/test/testgrande.jpg')
 
 #test=test[:,:,:]

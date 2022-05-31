@@ -36,7 +36,7 @@ def ProbarLambda(FileDirection,XName,YNAME):
     
 
 #data=h5py.File("Python\Modelado\Files\gatillos_train.h5",'r')
-data=h5py.File("../Files/gatillos_train.h5",'r')
+data=h5py.File("Gatos\Files\gatillos_train.h5",'r')
 X=data["train_set_x"][:]
 y=data["train_set_y"][:]
 
@@ -53,7 +53,7 @@ clasificador = SVC(kernel="poly",C=1)
 clasificador.fit(XProcessed,y)
 
 #Suc,Err=ProbarLambda("Python\Modelado\Files\gatillos_test.h5","test_set_x","test_set_y")
-Suc,Err=ProbarLambda("../Files/gatillos_test.h5","test_set_x","test_set_y")
+Suc,Err=ProbarLambda("Gatos\Files\gatillos_test.h5","test_set_x","test_set_y")
 
 print("aciertos",Suc)
 print("fallos",Err)

@@ -10,9 +10,9 @@ from H5DData import *
 transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))])
 
 #train_loader = torch.utils.data.DataLoader(H5DData("Python\Modelado\Files\digitos_train.h5", transform), batch_size=64, shuffle=True)
-train_loader = torch.utils.data.DataLoader(H5DData("../Files/digitos_train.h5", transform), batch_size=64, shuffle=True)
+train_loader = torch.utils.data.DataLoader(H5DData("Reconocimiento de Digitos\Files\digitos_train.h5", transform), batch_size=64, shuffle=True)
 #test_loader = torch.utils.data.DataLoader(H5DData("Python\Modelado\Files\digitos_test.h5", transform), batch_size=64, shuffle=True)
-test_loader = torch.utils.data.DataLoader(H5DData("../Files/digitos_test.h5", transform), batch_size=64, shuffle=True)
+test_loader = torch.utils.data.DataLoader(H5DData("Reconocimiento de Digitos\Files\digitos_test.h5", transform), batch_size=64, shuffle=True)
 
 # topologia de la red
 capa_entrada = 784
@@ -47,4 +47,4 @@ for e in range(epochs):
         print("Epoch {} - Funcion costo: {}".format(e, costo / len(train_loader)))
 print("\nTiempo de entrenamiento (en minutes) =", (time() - tiempo) / 60)
 #torch.save(modelo, 'Python\Modelado\Files\mi_modelo_digitos.pt')
-torch.save(modelo, '../Files/mi_modelo_digitos.pt')
+torch.save(modelo, 'Reconocimiento de Digitos\Files\mi_modelo_digitos.pt')

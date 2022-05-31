@@ -20,7 +20,7 @@ def agrupa_rostro(frame):
         )
     return gris, rostros
 
-data=loadmat('../Files/rostros.mat')
+data=loadmat('Reconocimiento de Lentes\Files\\rostros.mat')
 data.keys()
 X=data['images']
 y=data['target']

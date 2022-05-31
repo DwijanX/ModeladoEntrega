@@ -1,7 +1,7 @@
 #%%
 from cmath import sqrt
 
-from Libs.EulerHeuz import heuz,euler,RungeKuta
+from EulerHeuz import heuz,euler,RungeKuta
 import numpy
 import matplotlib.pyplot as pl
 

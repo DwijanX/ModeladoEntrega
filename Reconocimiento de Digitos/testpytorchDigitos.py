@@ -6,12 +6,12 @@ from torchvision import datasets, transforms
 import torch.nn.functional as F
 
 transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))])
-model_ft = torch.load("../Files/mi_modelo_digitos.pt")
+model_ft = torch.load("Reconocimiento de Digitos\Files\mi_modelo_digitos.pt")
 #model_ft = torch.load("Python\Modelado\Files\mi_modelo_digitos.pt")
 
 
 #imagen = cv2.imread("Python\Modelado\Files\test\testgrande.jpg")
-imagen = cv2.imread("../Files/test/testgrande.jpg")
+imagen = cv2.imread("Reconocimiento de Digitos\Files\\testgrande.jpg")
 imagenGris = cv2.cvtColor(imagen, cv2.COLOR_BGR2GRAY)
 imagenGris = cv2.GaussianBlur(imagenGris, (5, 5), 0)
 ret, imagenBN = cv2.threshold(imagenGris, 90, 255, cv2.THRESH_BINARY_INV)

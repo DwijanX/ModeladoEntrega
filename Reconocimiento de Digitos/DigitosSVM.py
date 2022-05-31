@@ -33,8 +33,8 @@ def ProcessImg(Img):
         return Img
 #data = h5py.File("Python\Modelado\Files\digitos.h5", "r")
 
-data = h5py.File("../Files/digitos.h5", "r")
-test=cv2.imread('../Files/test/testgrande.jpg')
+data = h5py.File("Reconocimiento de Digitos\Files\digitos.h5", "r")
+test=cv2.imread('Reconocimiento de Digitos\Files\testgrande.jpg')
 
 X = numpy.array(data["X"][:])
 Y = numpy.array(data["y"][:])

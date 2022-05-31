@@ -5,7 +5,7 @@ from Red_Neuronal  import *
 import matplotlib.pyplot as pl
 import cv2
 
-data=h5py.File("Python\Modelado\Files\gatillos_train.h5",'r')
+data=h5py.File("Gatos\Files\gatillos_train.h5",'r')
 #data=h5py.File("../Files/gatillos_train.h5",'r')
 X=data["train_set_x"][:]
 y=data["train_set_y"][:]
@@ -33,17 +33,17 @@ r.capa2=110
 r.capa3=2
 
 #r.inicializar()
-r.cargar_parametros("Python\Modelado\Files\Blanco_Negro\ParamsGatos_"+str(epoca)+".h5")
+r.cargar_parametros("Gatos\ParametrosGenerados\Blanco_Negro\ParamsGatos_"+str(epoca)+".h5")
 r.fit(XProcessed,y)
 r.setProcessImg(processImg)
 for i in range(3,15):
     print("\nEpoca=",i+1)
     r.entrenar()
     #Suc,Err=r.ProbarLambda("../Files/gatillos_test.h5","test_set_x","test_set_y")
-    Suc,Err=r.ProbarLambda("Python\Modelado\Files\gatillos_test.h5","test_set_x","test_set_y")
+    Suc,Err=r.ProbarLambda("Gatos\Files\gatillos_test.h5","test_set_x","test_set_y")
     print("suc",Suc)
     print("Err",Err)
-    r.GuardarParams("Python\Modelado\Files\Blanco_Negro\ParamsGatos_"+str(i+1)+".h5")
+    r.GuardarParams("Gatos\ParametrosGenerados\Blanco_Negro\ParamsGatos_"+str(i+1)+".h5")
 
 #4 vio bien
 #10 reconocio 16 gatos

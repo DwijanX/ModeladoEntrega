@@ -10,7 +10,7 @@ from torch.utils.data import Dataset
 import matplotlib.pyplot as pl
 
 transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))])
-model_ft = torch.load("../Files/mi_modeloDeGatos.pt")
+model_ft = torch.load("Gatos\Files\mi_modeloDeGatos.pt")
 
 
 def ProbarLambda(FileDirection,XName,YNAME):
@@ -50,7 +50,7 @@ def ProbarLambda(FileDirection,XName,YNAME):
 
 
 
-Suc,Err=ProbarLambda("../Files/gatillos_test.h5","test_set_x","test_set_y")
+Suc,Err=ProbarLambda("Gatos\Files\gatillos_test.h5","test_set_x","test_set_y")
 
 print("aciertos",Suc)
 print("fallos",Err)

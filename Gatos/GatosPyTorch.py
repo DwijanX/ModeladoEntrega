@@ -29,7 +29,7 @@ class H5DData(Dataset):
 
 
 transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
-train_loader = torch.utils.data.DataLoader(H5DData("../Files/gatillos_train.h5","train_set_x","train_set_y",transform), batch_size=64, shuffle=True)
+train_loader = torch.utils.data.DataLoader(H5DData("Gatos\Files\gatillos_train.h5","train_set_x","train_set_y",transform), batch_size=64, shuffle=True)
 #test_loader = torch.utils.data.DataLoader(H5DData("../Files/gatillos_test.h5","test_set_x","test_set_y",transform), batch_size=64, shuffle=True)
 
 capa_entrada = 12288
@@ -60,8 +60,8 @@ for e in range(epochs):
     else:
         print("Epoch {} - Funcion costo: {}".format(e, costo / len(train_loader)))
 print("\nTiempo de entrenamiento (en minutes) =", (time() - tiempo) / 60)
-#torch.save(modelo, 'Python\Modelado\Files\mi_modelo_digitos.pt')
-torch.save(modelo, '../Files/mi_modeloDeGatos.pt')
+torch.save(modelo, 'Gatos\Files\mi_modeloDeGatos.pt')
+#torch.save(modelo, '../Files/mi_modeloDeGatos.pt')
 
 
 #%%
