@@ -4,6 +4,7 @@ import torch
 from torch.autograd import Variable
 from torchvision import datasets, transforms
 import torch.nn.functional as F
+import matplotlib.pyplot as pl
 
 transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))])
 model_ft = torch.load("Reconocimiento de Digitos\Files\mi_modelo_digitos.pt")
@@ -27,7 +28,8 @@ for g in ventanas:
     p2 = int(g[0] + g[2] // 2) - l // 2
 
     digito = imagenBN[p1: p1+l, p2: p2+l]
-
+    pl.imshow(digito)
+    
     digito = cv2.resize(digito, (28, 28), interpolation=cv2.INTER_AREA)
     digito = cv2.dilate(digito, (3, 3,))
 
