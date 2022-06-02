@@ -1,4 +1,5 @@
 #%%
+from tkinter.tix import IMAGE
 import cv2
 import matplotlib.pyplot as pl
 from scipy.io import loadmat
@@ -7,6 +8,8 @@ from sklearn.svm import SVC
 import cv2
 import numpy
 from PIL import Image
+from matplotlib import cm
+
 def agrupa_rostro(frame):
     haar_xml =cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
     modelo = cv2.CascadeClassifier(haar_xml)
@@ -20,13 +23,7 @@ def agrupa_rostro(frame):
         )
     return gris, rostros
 
-<<<<<<< Updated upstream
-data=loadmat('Reconocimiento de Lentes\Files\\rostros.mat')
-=======
-
-
 data=loadmat('./Files/rostros.mat')
->>>>>>> Stashed changes
 data.keys()
 X=data['images']
 y=data['target']
@@ -45,7 +42,7 @@ def processImg(Img):
     return Img.reshape(1,-1)
 
 XImagReshaped=numpy.vstack(numpy.array([processImg(x) for x in XImag]))
-clasificador = SVC(kernel="rbf", gamma=10,C=1)
+clasificador = SVC(kernel="poly",gamma=2,C=1)
 clasificador.fit(XImagReshaped,YImag)
 
 def ProbarLambda(X,Y):
@@ -74,66 +71,56 @@ def ProbarLambda(X,Y):
         
         return SuccessCount/(ErrorCount+SuccessCount),ErrorCount/(ErrorCount+SuccessCount)
     
-print(YImag[0])
-Suc,Err=ProbarLambda(XImagReshaped,YImag)
+#print(YImag[0])
+#Suc,Err=ProbarLambda(XImagReshaped,YImag)
 
-print("aciertos",Suc)
-print("fallos",Err)
+#print("aciertos",Suc)
+#print("fallos",Err)
 
 
-"""for x in XImagReshaped:
-    print(clasificador.predict(x.reshape(1,-1)))
-    pl.imshow(x.reshape(64,64))
-    pl.show()"""
-
+"""
 img=cv2.imread('.\\Files\\test.jpg')
 gris, rostro = agrupa_rostro(img)
 #print(rostro)
 i = 0
 for face in rostro:
     (x, y, w, h) = face
-    espacio=int(h*1.6)
-    """
-    p1=int((y+h//2))+espacio//2
-    p2=int((x+w//2))+espacio//2"""
-    print(p1)
-    print(p2)
-    p1 = int(y + h // 2) - espacio // 2
-    p2 = int(x + w // 2) - espacio // 2
 
-    JustFace = gris[p1: p1+espacio, p2: p2+espacio]
-
-    #JustFace=gris[p1:p1+espacio,p2:p2+espacio]
-    #JustFace=gris[x:x+w-espacio,y:y+h-espacio]
-    pl.imshow( JustFace)
-    JustFace=numpy.resize(JustFace,(64,64))
-    if w > 100:
+    if x+w>0 and y + h>0 :
+        JustFace = gris[y:y + h,x:x+w]
+        pilImg = Image.fromarray(JustFace)
+        JustFace = pilImg.resize((64,64))
+        JustFace = numpy.array(JustFace)
+        pl.imshow(JustFace)
+        pl.show()
         cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
         identified=clasificador.predict(JustFace.reshape(1,-1))
+        print(identified)
         cv2.putText(img,str(identified),(x,y-20),cv2.FONT_HERSHEY_SIMPLEX,2,(0,255,0))
-        #pl.imshow( img)
+        pl.imshow(img)
+        pl.show()
 """
+#%%               
+
 video_capture = cv2.VideoCapture(0)
 
 while True:
     ret, frame = video_capture.read()
     
     gris, rostro = agrupa_rostro(frame)
-    #print(rostro)
     i = 0
     for face in rostro:
         (x, y, w, h) = face
-        espacio=int(h*1.6)
-        p1=int((y+h//2))-espacio//2
-        p2=int((x+w//2))-espacio//2
-        JustFace=gris[p1:p1+espacio,p2:p2+espacio]
-        
-        JustFace=numpy.resize(JustFace,(64,64))
-        if w > 100:
+        if x+w>0 and y + h>0 :
+            JustFace = gris[y:y + h,x:x+w]
+            pilImg = Image.fromarray(JustFace)
+            JustFace = pilImg.resize((64,64))
+            JustFace = numpy.array(JustFace)
             cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
             identified=clasificador.predict(JustFace.reshape(1,-1))
+            print(identified)
             cv2.putText(frame,str(identified),(x,y-20),cv2.FONT_HERSHEY_SIMPLEX,2,(0,255,0))
-    
+        
     cv2.imshow('Video', frame)
 
     if cv2.waitKey(49) & 0xFF == ord('q'):
@@ -141,4 +128,5 @@ while True:
 
 video_capture.release()
 cv2.destroyAllWindows()
-"""
+
+#%%

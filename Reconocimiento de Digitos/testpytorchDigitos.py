@@ -28,7 +28,6 @@ for g in ventanas:
     p2 = int(g[0] + g[2] // 2) - l // 2
 
     digito = imagenBN[p1: p1+l, p2: p2+l]
-    pl.imshow(digito)
     
     digito = cv2.resize(digito, (28, 28), interpolation=cv2.INTER_AREA)
     digito = cv2.dilate(digito, (3, 3,))
@@ -38,6 +37,7 @@ for g in ventanas:
     digito = Variable(digito)
 
     digito = digito.view(digito.shape[0], -1)
+    
     predict = F.softmax(model_ft(digito), dim=1)
 
     cv2.putText(imagen, str(predict.argmax().item()), (g[0], g[1]-50), cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 0))

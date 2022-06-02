@@ -21,7 +21,10 @@ def ProcessImg(Img):
                 p2=int((v[0]+v[2]//2))-espacio//2
 
                 digito=imagen_bn[p1:p1+espacio,p2:p2+espacio]
+                
                 if p2>0 and p1>0 and espacio>40:
+                        pl.imshow(digito)
+                        pl.show()
                         height,width=digito.shape
                         rescaled = cv2.resize(digito, (0, 0), fx=20/width, fy=20/height)
                         rescaled=rescaled.reshape(1,-1)
@@ -33,8 +36,10 @@ def ProcessImg(Img):
         return Img
 #data = h5py.File("Python\Modelado\Files\digitos.h5", "r")
 
-data = h5py.File("Reconocimiento de Digitos\Files\digitos.h5", "r")
-test=cv2.imread('Reconocimiento de Digitos\Files\testgrande.jpg')
+data = h5py.File("./Files/digitos.h5", "r")
+#data = h5py.File("Reconocimiento de Digitos\Files\digitos.h5", "r")
+#test=cv2.imread('Reconocimiento de Digitos\Files\testgrande.jpg')
+test=cv2.imread('./Files/testgrande.jpg')
 
 X = numpy.array(data["X"][:])
 Y = numpy.array(data["y"][:])
